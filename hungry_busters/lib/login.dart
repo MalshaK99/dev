@@ -38,8 +38,8 @@ class _LoginState extends State<Login> {
             padding: const EdgeInsets.all(5),
             child: const TextField(
               decoration: InputDecoration(
-                labelText: 'Enter the Name',
-                hintText: ' Name',
+                labelText: 'Enter the Email',
+                hintText: ' Email here',
               ),
             ),
           ),
