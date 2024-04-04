@@ -126,8 +126,7 @@ class _LoginState extends State<Login> {
                       if (email == 'abc@gmail.com' && password == 'abc123') {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomePage()),
+                          MaterialPageRoute(builder: (context) => HomePage()),
                         );
                       }
                     },
