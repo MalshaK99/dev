@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hungry_busters/footer.dart';
+
+import 'menu.dart';
 
 void main() => runApp(HomePage());
 
 class HomePage extends StatelessWidget {
+  final FocusNode _searchFocusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,6 +28,7 @@ class HomePage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   hintText: 'Search meals',
                   prefixIcon: Icon(Icons.search),
@@ -34,6 +40,7 @@ class HomePage extends StatelessWidget {
                   fillColor:
                       Colors.grey[200], // Set ash color fill for search bar
                 ),
+                focusNode: _searchFocusNode, // Assign the focus node
               ),
             ),
             Container(
@@ -67,85 +74,98 @@ class HomePage extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(16.0), // Set card border radius
-                    ),
-                    child: ListTile(
-                      contentPadding:
-                          EdgeInsets.zero, // Remove the default padding
-                      leading: Container(
-                        width: MediaQuery.of(context).size.width / 4,
-                        height: double
-                            .infinity, // Set the height to fill the ListTile
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                              16.0), // Match card border radius
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical:
-                                    0.0), // Adjust the vertical padding here
-                            child: Image.asset(
-                              items[index].imageUrl,
-                              fit: BoxFit
-                                  .cover, // Cover the container with the image
-                            ),
+              child: ListView(
+                children: items.map((item) {
+                  return MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: () {
+                          // Navigate to the menu of the dish
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MenuPage()),
+                          );
+                        },
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
                           ),
-                        ),
-                      ),
-                      title: Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 0.0, horizontal: 16.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              items[index].title,
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              '${items[index].price} LKR',
-                              style: const TextStyle(
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                      ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            items[index].subtitle,
-                            style: TextStyle(fontSize: 12.0),
-                          ),
-                          const Row(
+                          child: Stack(
                             children: [
-                              Icon(Icons.star, color: Colors.red, size: 20.0),
-                              Icon(Icons.star, color: Colors.red, size: 20.0),
-                              Icon(Icons.star, color: Colors.red, size: 20.0),
-                              Icon(Icons.star, color: Colors.red, size: 20.0),
-                              Icon(Icons.star_border,
-                                  color: Colors.grey, size: 20.0),
-                              Text(
-                                '4.5',
-                                style: TextStyle(fontSize: 16.0),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(16.0),
+                                child: Image.asset(
+                                  item.imageUrl,
+                                  fit: BoxFit.cover,
+                                  width: MediaQuery.of(context).size.width /
+                                      3, // 1/3 of card width
+                                ),
+                              ),
+                              Positioned(
+                                top: 8.0,
+                                right: 8.0,
+                                child: HeartButton(),
+                              ),
+                              Positioned(
+                                bottom: 8.0,
+                                right: 8.0,
+                                child: Text(
+                                  '${item.price} LKR',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: 8.0,
+                                left: MediaQuery.of(context).size.width / 3 +
+                                    16.0,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      item.title,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(Icons.star,
+                                            color: Colors.red, size: 20.0),
+                                        Icon(Icons.star,
+                                            color: Colors.red, size: 20.0),
+                                        Icon(Icons.star,
+                                            color: Colors.red, size: 20.0),
+                                        Icon(Icons.star,
+                                            color: Colors.red, size: 20.0),
+                                        Icon(Icons.star_border,
+                                            color: Colors.grey, size: 20.0),
+                                        Text(
+                                          '4.5',
+                                          style: TextStyle(fontSize: 16.0),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      item.subtitle,
+                                      style: TextStyle(fontSize: 12.0),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
+                        ),
+                      ));
+                }).toList(),
               ),
             ),
           ],
         ),
+        bottomNavigationBar: Footer(), // Include Footer widget here
       ),
     );
   }
@@ -165,42 +185,66 @@ class Item {
   });
 }
 
-// Dummy list of items
+// List of items
 final List<Item> items = [
   Item(
     imageUrl: 'assets/food1.png',
-    title: 'Item 1',
-    subtitle: 'Subtitle 1',
-    price: 100.0,
+    title: 'Tex Mex BBQ',
+    subtitle: 'non veg classic meat',
+    price: 1050.0,
   ),
   Item(
     imageUrl: 'assets/food2.png',
-    title: 'Item 2',
-    subtitle: 'Subtitle 2',
-    price: 200.0,
+    title: 'Pasta Mozarella',
+    subtitle: 'cheasy classic dish',
+    price: 2000.0,
   ),
   Item(
-    imageUrl: 'assets/food6.png',
-    title: 'Item 3',
-    subtitle: 'Subtitle 3',
-    price: 300.0,
+    imageUrl: 'assets/food1.png',
+    title: 'Burger BBQ',
+    subtitle: 'non veg classic burgur',
+    price: 1200.0,
   ),
   Item(
-    imageUrl: 'assets/food4.png',
-    title: 'Item 3',
-    subtitle: 'Subtitle 3',
-    price: 300.0,
+    imageUrl: 'assets/food2.png',
+    title: 'Pasta Mozarella',
+    subtitle: 'non veg classic meat',
+    price: 2100.0,
   ),
   Item(
-    imageUrl: 'assets/food5.png',
-    title: 'Item 3',
-    subtitle: 'Subtitle 3',
-    price: 300.0,
+    imageUrl: 'assets/food1.png',
+    title: 'Burger BBQ',
+    subtitle: 'non veg classic meat',
+    price: 1200.0,
   ),
   Item(
-    imageUrl: 'assets/food6.png',
-    title: 'Item 3',
-    subtitle: 'Subtitle 3',
-    price: 300.0,
+    imageUrl: 'assets/food2.png',
+    title: 'Pasta Mozarella',
+    subtitle: 'non veg classic dish',
+    price: 1500.0,
   ),
 ];
+
+class HeartButton extends StatefulWidget {
+  @override
+  _HeartButtonState createState() => _HeartButtonState();
+}
+
+class _HeartButtonState extends State<HeartButton> {
+  bool _isPressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        _isPressed ? Icons.favorite : Icons.favorite_border,
+        color: _isPressed ? Colors.yellow : Colors.grey,
+      ),
+      onPressed: () {
+        setState(() {
+          _isPressed = !_isPressed;
+        });
+      },
+    );
+  }
+}
