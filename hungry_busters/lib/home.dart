@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hungry_busters/footer.dart';
+import 'package:hungry_busters/heartButton.dart';
 
 import 'menu.dart';
 
@@ -31,7 +32,7 @@ class HomePage extends StatelessWidget {
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   hintText: 'Search meals',
-                  prefixIcon: Icon(Icons.search),
+                  prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
                     borderSide: BorderSide.none,
@@ -111,7 +112,7 @@ class HomePage extends StatelessWidget {
                                 right: 8.0,
                                 child: Text(
                                   '${item.price} LKR',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.red,
                                   ),
@@ -126,12 +127,12 @@ class HomePage extends StatelessWidget {
                                   children: [
                                     Text(
                                       item.title,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16.0,
                                       ),
                                     ),
-                                    Row(
+                                    const Row(
                                       children: [
                                         Icon(Icons.star,
                                             color: Colors.red, size: 20.0),
@@ -151,7 +152,7 @@ class HomePage extends StatelessWidget {
                                     ),
                                     Text(
                                       item.subtitle,
-                                      style: TextStyle(fontSize: 12.0),
+                                      style: const TextStyle(fontSize: 12.0),
                                     ),
                                   ],
                                 ),
@@ -224,27 +225,3 @@ final List<Item> items = [
     price: 1500.0,
   ),
 ];
-
-class HeartButton extends StatefulWidget {
-  @override
-  _HeartButtonState createState() => _HeartButtonState();
-}
-
-class _HeartButtonState extends State<HeartButton> {
-  bool _isPressed = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(
-        _isPressed ? Icons.favorite : Icons.favorite_border,
-        color: _isPressed ? Colors.yellow : Colors.grey,
-      ),
-      onPressed: () {
-        setState(() {
-          _isPressed = !_isPressed;
-        });
-      },
-    );
-  }
-}
