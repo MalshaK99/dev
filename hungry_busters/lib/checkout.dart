@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hungry_busters/footer.dart';
+import 'package:hungry_busters/popup.dart';
 
 void main() => runApp(CheckOut());
 
@@ -21,42 +22,55 @@ class CheckOut extends StatelessWidget {
                 }).toList(),
               ),
             ),
-            SizedBox(height: 30), // Add spacing before the button
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.red,
-              ),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Add your button onPressed logic here
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+            SizedBox(height: 10), // Add spacing between cards and dots
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Dot(color: Colors.grey), // Grey dot
+                SizedBox(width: 10), // Add spacing between dots
+                Dot(color: Colors.grey), // Grey dot
+                SizedBox(width: 10), // Add spacing between dots
+                Dot(color: Colors.red), // Red dot
+              ],
+            ),
+            SizedBox(height: 10), // Add spacing between dots and button
+            // Check Out button
+            Padding(
+              padding: const EdgeInsets.all(8.0), // Adjust padding as needed
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return PopUp();
+                      },
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(
+                        vertical: 16), // Adjust button height
+                    backgroundColor: Colors.red, // Set background color to red
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
-                ),
-                child: const SizedBox(
-                  width: double.infinity,
                   child: Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: Center(
-                      child: Text(
-                        'Check Out',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.white, // Set text color to white
-                        ),
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      'Check Out',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: Colors.white, // Set text color to white
                       ),
                     ),
                   ),
                 ),
               ),
             ),
+            SizedBox(height: 20), // Add padding between button and bottom
           ],
         ),
         bottomNavigationBar: Footer(), // Include Footer widget here
@@ -65,16 +79,101 @@ class CheckOut extends StatelessWidget {
   }
 }
 
-class ItemCard extends StatefulWidget {
+class Dot extends StatelessWidget {
+  final Color color;
+
+  const Dot({Key? key, required this.color}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 10, // Adjust the size of the dot
+      height: 10, // Adjust the size of the dot
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: color,
+      ),
+    );
+  }
+}
+
+class ItemCard extends StatelessWidget {
   final Item item;
 
   const ItemCard({Key? key, required this.item}) : super(key: key);
 
   @override
-  _ItemCardState createState() => _ItemCardState();
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16.0),
+            child: Image.asset(
+              item.imageUrl,
+              fit: BoxFit.cover,
+              width: MediaQuery.of(context).size.width / 3,
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    item.title,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  const Row(
+                    children: [
+                      Icon(Icons.star, color: Colors.red, size: 20.0),
+                      Icon(Icons.star, color: Colors.red, size: 20.0),
+                      Icon(Icons.star, color: Colors.red, size: 20.0),
+                      Icon(Icons.star, color: Colors.red, size: 20.0),
+                      Icon(Icons.star_border, color: Colors.grey, size: 20.0),
+                      Text(
+                        '4.5',
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        '${item.price} LKR',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                        ),
+                      ),
+                      Spacer(), // Add spacer to push buttons to the right
+                      IncDecCounter(),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
-class _ItemCardState extends State<ItemCard> {
+class IncDecCounter extends StatefulWidget {
+  @override
+  _IncDecCounterState createState() => _IncDecCounterState();
+}
+
+class _IncDecCounterState extends State<IncDecCounter> {
   int quantity = 0;
 
   void _increment() {
@@ -93,90 +192,17 @@ class _ItemCardState extends State<ItemCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.0),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16.0),
-                child: Image.asset(
-                  widget.item.imageUrl,
-                  fit: BoxFit.cover,
-                  width: MediaQuery.of(context).size.width / 3,
-                ),
-              ),
-            ],
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.item.title,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        '${widget.item.price} LKR',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.red,
-                        ),
-                      ),
-                      Spacer(), // Add spacer to push buttons to the right
-                      IncDecCounter(
-                        increment: _increment,
-                        decrement: _decrement,
-                        quantity: quantity,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class IncDecCounter extends StatelessWidget {
-  final VoidCallback increment;
-  final VoidCallback decrement;
-  final int quantity;
-
-  const IncDecCounter({
-    Key? key,
-    required this.increment,
-    required this.decrement,
-    required this.quantity,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
     return Row(
       children: [
         IconButton(
           icon: Icon(Icons.remove),
-          onPressed: decrement,
+          onPressed: _decrement,
           color: Colors.red,
         ),
         Text('$quantity'),
         IconButton(
           icon: Icon(Icons.add),
-          onPressed: increment,
+          onPressed: _increment,
           color: Colors.red,
         ),
       ],
