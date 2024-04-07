@@ -4,9 +4,9 @@ import 'package:hungry_busters/heartButton.dart';
 
 import 'menu.dart';
 
-void main() => runApp(HomePage());
+void main() => runApp(Home());
 
-class HomePage extends StatelessWidget {
+class Home extends StatelessWidget {
   final FocusNode _searchFocusNode = FocusNode();
 
   @override
@@ -166,7 +166,10 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: Footer(), // Include Footer widget here
+        bottomNavigationBar: Footer(
+          currentPage: 'home',
+          onPageChanged: (String) {},
+        ), // Include Footer widget here
       ),
     );
   }

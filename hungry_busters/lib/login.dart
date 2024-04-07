@@ -123,10 +123,10 @@ class _LoginState extends State<Login> {
                   ),
                   child: ElevatedButton(
                     onPressed: () {
-                      if (email == 'a' && password == 'abc123') {
+                      if (email == 'abc@gmail.com' && password == 'abc123') {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => HomePage()),
+                          MaterialPageRoute(builder: (context) => Home()),
                         );
                       }
                     },

@@ -12,6 +12,17 @@ class CheckOut extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Order Summary', // Heading text
+                style: TextStyle(
+                  fontSize: 25, // Adjust the font size as needed
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
             Expanded(
               child: ListView(
                 children: items.map((item) {
@@ -57,7 +68,7 @@ class CheckOut extends StatelessWidget {
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Text(
                       'Check Out',
                       style: TextStyle(
@@ -73,7 +84,10 @@ class CheckOut extends StatelessWidget {
             SizedBox(height: 20), // Add padding between button and bottom
           ],
         ),
-        bottomNavigationBar: Footer(), // Include Footer widget here
+        bottomNavigationBar: Footer(
+          currentPage: 'checkout',
+          onPageChanged: (String) {},
+        ), // Include Footer widget here
       ),
     );
   }

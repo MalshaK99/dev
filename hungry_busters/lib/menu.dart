@@ -182,7 +182,10 @@ class MenuPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: Footer(), // Include Footer widget here
+      bottomNavigationBar: Footer(
+        currentPage: 'menu',
+        onPageChanged: (String) {},
+      ), // Include Footer widget here
     );
   }
 
