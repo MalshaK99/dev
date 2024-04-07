@@ -24,8 +24,6 @@ class HomePage extends StatelessWidget {
       bottomNavigationBar: Footer(
         currentPage: 'home',
         onPageChanged: (String newPage) {
-          // Implement navigation logic here
-          // For demonstration, we'll just print the new page
           print('Navigating to $newPage');
         },
       ),
@@ -42,8 +40,6 @@ class CheckOutPage extends StatelessWidget {
       bottomNavigationBar: Footer(
         currentPage: 'checkout',
         onPageChanged: (String newPage) {
-          // Implement navigation logic here
-          // For demonstration, we'll just print the new page
           print('Navigating to $newPage');
         },
       ),
@@ -126,7 +122,6 @@ class Footer extends StatelessWidget {
             },
             isSelected: currentPage == 'menu',
           ),
-          // Add other buttons here
         ],
       ),
     );

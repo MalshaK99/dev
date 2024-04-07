@@ -16,7 +16,7 @@ class Home extends StatelessWidget {
         appBar: AppBar(
           leading: const Icon(
             Icons.menu,
-            color: Colors.red, // Set menu icon color to red
+            color: Colors.red,
           ),
           actions: <Widget>[
             const Text('Good Afternoon Victoria!'),
@@ -38,10 +38,9 @@ class Home extends StatelessWidget {
                     borderSide: BorderSide.none,
                   ),
                   filled: true,
-                  fillColor:
-                      Colors.grey[200], // Set ash color fill for search bar
+                  fillColor: Colors.grey[200],
                 ),
-                focusNode: _searchFocusNode, // Assign the focus node
+                focusNode: _searchFocusNode,
               ),
             ),
             Container(
@@ -50,23 +49,22 @@ class Home extends StatelessWidget {
               child: Image.asset(
                 'assets/cover.png',
                 fit: BoxFit.cover,
-                width: 200.0, // Set width to make it align left
+                width: 200.0,
               ),
             ),
             Container(
-              height: 100.0, // Adjust the height of the repeating list
+              height: 100.0,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 10, // Change the number of repeating items as needed
+                itemCount: 10,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CircleAvatar(
-                      radius: 30.0, // Set the radius of the circle
-                      backgroundColor:
-                          Colors.red, // Set the background color to red
+                      radius: 30.0,
+                      backgroundColor: Colors.red,
                       child: Image.asset(
-                        'assets/dinner.png', // Change to your image asset path
+                        'assets/dinner.png',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -81,7 +79,6 @@ class Home extends StatelessWidget {
                       cursor: SystemMouseCursors.click,
                       child: GestureDetector(
                         onTap: () {
-                          // Navigate to the menu of the dish
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => MenuPage()),
@@ -98,8 +95,7 @@ class Home extends StatelessWidget {
                                 child: Image.asset(
                                   item.imageUrl,
                                   fit: BoxFit.cover,
-                                  width: MediaQuery.of(context).size.width /
-                                      3, // 1/3 of card width
+                                  width: MediaQuery.of(context).size.width / 3,
                                 ),
                               ),
                               Positioned(
@@ -169,7 +165,7 @@ class Home extends StatelessWidget {
         bottomNavigationBar: Footer(
           currentPage: 'home',
           onPageChanged: (String) {},
-        ), // Include Footer widget here
+        ),
       ),
     );
   }
@@ -189,7 +185,6 @@ class Item {
   });
 }
 
-// List of items
 final List<Item> items = [
   Item(
     imageUrl: 'assets/food1.png',

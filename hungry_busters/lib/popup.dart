@@ -6,14 +6,12 @@ class PopUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Blurred Background
         BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
           child: Container(
-            color: Colors.white.withOpacity(0.5), // Adjust opacity as needed
+            color: Colors.white.withOpacity(0.5),
           ),
         ),
-        // Popup content
         Center(
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10.0),
@@ -38,7 +36,7 @@ class PopUp extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '9400 LKR', // Sample price, replace with actual value
+                          '9400 LKR',
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.grey,
@@ -58,7 +56,7 @@ class PopUp extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '300 LKR', // Sample price, replace with actual value
+                          '300 LKR',
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.grey,
@@ -79,7 +77,7 @@ class PopUp extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '9700 LKR', // Sample price, replace with actual value
+                          '9700 LKR',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -130,9 +128,7 @@ class PopUp extends StatelessWidget {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () {
-                            // Add address change logic here
-                          },
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                           ),
@@ -158,7 +154,7 @@ class PopUp extends StatelessWidget {
                               'assets/visa.png',
                               height: 30,
                             ),
-                            SizedBox(width: 10), // Add some spacing
+                            const SizedBox(width: 10),
                             Text(
                               '.... .... .... 4656',
                               style: TextStyle(
@@ -168,16 +164,13 @@ class PopUp extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
-                            height: 0.0), // Ensure SizedBox has height of 0.0
+                        SizedBox(height: 0.0),
                         ElevatedButton(
-                          onPressed: () {
-                            // Add payment method change logic here
-                          },
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                           ),
-                          child: Text(
+                          child: const Text(
                             'Change',
                             style: TextStyle(color: Colors.red),
                           ),

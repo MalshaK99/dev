@@ -29,8 +29,8 @@ class MenuPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -66,8 +66,8 @@ class MenuPage extends StatelessWidget {
                   Column(
                     children: [
                       HeartButton(),
-                      SizedBox(width: 8.0),
-                      Text(
+                      const SizedBox(width: 8.0),
+                      const Text(
                         'Price LKR',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -100,7 +100,7 @@ class MenuPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: SizedBox(
+                child: const SizedBox(
                   width: double.infinity,
                   child: Padding(
                     padding: EdgeInsets.all(12.0),
@@ -125,7 +125,7 @@ class MenuPage extends StatelessWidget {
                 children: [
                   SizedBox(height: 10),
                   RichText(
-                    text: TextSpan(
+                    text: const TextSpan(
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 14,
@@ -152,7 +152,7 @@ class MenuPage extends StatelessWidget {
                     color: Colors.grey,
                   ),
                   SizedBox(height: 13),
-                  Text(
+                  const Text(
                     "You might also like",
                     style: TextStyle(
                         fontSize: 13,
@@ -172,7 +172,6 @@ class MenuPage extends StatelessWidget {
                         buildMenuItem('assets/food4.png'),
                         buildMenuItem('assets/food5.png'),
                         buildMenuItem('assets/food6.png'),
-                        // Add more items if needed
                       ],
                     ),
                   ),
@@ -185,15 +184,13 @@ class MenuPage extends StatelessWidget {
       bottomNavigationBar: Footer(
         currentPage: 'menu',
         onPageChanged: (String) {},
-      ), // Include Footer widget here
+      ),
     );
   }
 
   Widget buildMenuItem(String imagePath) {
     return GestureDetector(
-      onTap: () {
-        // Handle button press for each item
-      },
+      onTap: () {},
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Image.asset(

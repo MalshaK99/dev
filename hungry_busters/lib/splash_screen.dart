@@ -12,11 +12,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    // Define a Timer to navigate to the login screen after 30 seconds
     Timer(Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-            builder: (context) => Login()), // Navigate to Login screen
+        MaterialPageRoute(builder: (context) => Login()),
       );
     });
   }

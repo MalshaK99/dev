@@ -101,9 +101,7 @@ class _LoginState extends State<Login> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: TextButton(
-                      onPressed: () {
-                        // Implement your Forgot Password functionality here
-                      },
+                      onPressed: () {},
                       child: const Text(
                         'Forgot Password?',
                         style: TextStyle(
@@ -147,7 +145,7 @@ class _LoginState extends State<Login> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
-                              color: Colors.white, // Set text color to white
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -160,9 +158,7 @@ class _LoginState extends State<Login> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     InkWell(
-                      onTap: () {
-                        // Implement your Google Sign In functionality here
-                      },
+                      onTap: () {},
                       child: Image.asset(
                         'assets/google.png',
                         height: 40,
@@ -170,9 +166,7 @@ class _LoginState extends State<Login> {
                     ),
                     const SizedBox(width: 10),
                     InkWell(
-                      onTap: () {
-                        // Implement your Facebook Sign In functionality here
-                      },
+                      onTap: () {},
                       child: Image.asset(
                         'assets/facebook.png',
                         height: 40,
@@ -185,9 +179,7 @@ class _LoginState extends State<Login> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     InkWell(
-                      onTap: () {
-                        // Implement your SignUp functionality here
-                      },
+                      onTap: () {},
                       child: const Text(
                         "Don't have an account? Sign Up",
                         style: TextStyle(

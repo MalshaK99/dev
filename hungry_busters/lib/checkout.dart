@@ -12,12 +12,12 @@ class CheckOut extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
-                'Order Summary', // Heading text
+                'Order Summary',
                 style: TextStyle(
-                  fontSize: 25, // Adjust the font size as needed
+                  fontSize: 25,
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
                 ),
@@ -33,21 +33,20 @@ class CheckOut extends StatelessWidget {
                 }).toList(),
               ),
             ),
-            SizedBox(height: 10), // Add spacing between cards and dots
-            Row(
+            const SizedBox(height: 10),
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Dot(color: Colors.grey), // Grey dot
-                SizedBox(width: 10), // Add spacing between dots
-                Dot(color: Colors.grey), // Grey dot
-                SizedBox(width: 10), // Add spacing between dots
-                Dot(color: Colors.red), // Red dot
+                Dot(color: Colors.grey),
+                SizedBox(width: 10),
+                Dot(color: Colors.grey),
+                SizedBox(width: 10),
+                Dot(color: Colors.red),
               ],
             ),
-            SizedBox(height: 10), // Add spacing between dots and button
-            // Check Out button
+            const SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.all(8.0), // Adjust padding as needed
+              padding: const EdgeInsets.all(8.0),
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -60,34 +59,33 @@ class CheckOut extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(
-                        vertical: 16), // Adjust button height
-                    backgroundColor: Colors.red, // Set background color to red
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    backgroundColor: Colors.red,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text(
                       'Check Out',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
-                        color: Colors.white, // Set text color to white
+                        color: Colors.white,
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 20), // Add padding between button and bottom
+            const SizedBox(height: 20),
           ],
         ),
         bottomNavigationBar: Footer(
           currentPage: 'checkout',
           onPageChanged: (String) {},
-        ), // Include Footer widget here
+        ),
       ),
     );
   }
@@ -101,8 +99,8 @@ class Dot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 10, // Adjust the size of the dot
-      height: 10, // Adjust the size of the dot
+      width: 10,
+      height: 10,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: color,
@@ -168,7 +166,7 @@ class ItemCard extends StatelessWidget {
                           color: Colors.red,
                         ),
                       ),
-                      Spacer(), // Add spacer to push buttons to the right
+                      Spacer(),
                       IncDecCounter(),
                     ],
                   ),
@@ -236,7 +234,6 @@ class Item {
   });
 }
 
-// List of items
 final List<Item> items = [
   Item(imageUrl: 'assets/food1.png', title: 'Tex Mex BBQ', price: '1200'),
   Item(imageUrl: 'assets/food2.png', title: 'Pasta Mozarella', price: '1200'),
